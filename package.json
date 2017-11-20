@@ -1,0 +1,9 @@
+{
+  "name": "container-builder-github-ci-status",
+  "version": "0.1.0",
+  "description": "GitHub CI integration for Google Cloud Container Builder, using Google Cloud Functions /w PubSub",
+  "main": "index.js",
+  "dependencies": {
+    "github": "12.0.3"
+  }
+}
