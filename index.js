@@ -49,11 +49,13 @@ module.exports.setCIStatus = (event) => {
     ? `${projectId}/gcb: ${tags.join('/')}`
     : `${projectId}/gcb: ${id.substring(0,8)}`
 
-  const ghDescription = createTime && finishTime
+  const ghDescription = (
+    createTime && finishTime
     ? secondsToString((new Date(finishTime) - new Date(createTime)) / 1000)
     : images && images.length > 0
       ? `${images.join('\n')}`
       : ''
+  ).substring(0,140)
 
   console.log(status, ghStatus)
   console.log(ghRepo, repoSource)
