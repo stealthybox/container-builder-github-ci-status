@@ -31,7 +31,9 @@ Otherwise, it falls back to the build-GUID.
 
 CI Status **description** will either be:
 - nothing
-- a join of all images to be published:
+- a join of all images to be published:  
   `gcr.io/project/image:v1 gcr.io/project/image:latest`
-- above all, the duration of the build:
+- above all, the duration of the build:  
   `3m 27s`
+- possibly with the last-running build step and error status:  
+  `3m 27s · test failure`

@@ -26,6 +26,7 @@ module.exports.setCIStatus = (event) => {
     id,
     projectId,
     status,
+    steps,
     images,
     sourceProvenance: {
       resolvedRepoSource: repoSource
@@ -49,9 +50,13 @@ module.exports.setCIStatus = (event) => {
     ? `${projectId}/gcb: ${tags.join('/')}`
     : `${projectId}/gcb: ${id.substring(0,8)}`
 
+  const lastStep = steps.filter( s => s.timing && s.timing.startTime ).pop()
+  const failureDescription = (ghStatus=='failure' || ghStatus=='error')
+    ? ' · ' + (lastStep ? `${lastStep.id} `:'') + status.toLowerCase()
+    : ''
   const ghDescription = (
     createTime && finishTime
-    ? secondsToString((new Date(finishTime) - new Date(createTime)) / 1000)
+    ? secondsToString((new Date(finishTime) - new Date(createTime)) / 1000) + failureDescription
     : images && images.length > 0
       ? `${images.join('\n')}`
       : ''
