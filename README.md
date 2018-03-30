@@ -14,11 +14,7 @@ Set the following on `config` in [index.js](./index.js):
 
 Deploy the cloud function to gcloud:
 ```
-PROJECT_ID=$(gcloud config get-value core/project)
-
-gsutil mb gs://${PROJECT_ID}-gcb-cistatus
-
-gcloud beta functions deploy setCIStatus --stage-bucket ${PROJECT_ID}-gcb-cistatus --trigger-topic cloud-builds
+gcloud beta functions deploy setCIStatus --trigger-topic cloud-builds
 ```
 
 ## Behavior
