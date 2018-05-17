@@ -46,8 +46,9 @@ module.exports.setCIStatus = (event) => {
     : false
   if (!ghRepo) return
 
-  const ghContext = tags && tags.length > 0
-    ? `${projectId}/gcb: ${tags.join('/')}`
+  const prettyTags = tags && tags.filter(t => !t.match(/(event|trigger|eval|invocation)-[\w-]{36}/))
+  const ghContext = prettyTags && prettyTags.length > 0
+    ? `${projectId}/gcb: ${prettyTags.join('/')}`
     : `${projectId}/gcb: ${id.substring(0,8)}`
 
   const lastStep = steps.filter( s => s.timing && s.timing.startTime ).pop()
